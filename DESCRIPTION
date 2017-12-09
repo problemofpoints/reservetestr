@@ -1,8 +1,8 @@
 Package: reservetestr
 Version: 0.0.0.9000
-Title: What the Package Does (one line, title case)
-Description: What the package does (one paragraph).
-Authors@R: person("First", "Last", , "first.last@example.com", c("aut", "cre"))
+Title: Provides a Framework for Testing Loss Reserve Methods
+Description: This pacakge provides a framework for testing loss reserve methods. Specifically, a interface to test methods against the Casualty Actuarial Society (CAS) Loss Reserve Database is provided.
+Authors@R: person("Adam", "Troyer", , "problemofpoints@gmail.com", c("aut", "cre"))
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
@@ -14,3 +14,5 @@ Suggests:
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.0.1
 VignetteBuilder: knitr
+URL: https://github.com/problemofpoints/reservetestr
+BugReports: https://github.com/problemofpoints/reservetestr/issues
