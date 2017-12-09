@@ -16,3 +16,6 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 URL: https://github.com/problemofpoints/reservetestr
 BugReports: https://github.com/problemofpoints/reservetestr/issues
+Imports: 
+    magrittr,
+    rlang (>= 0.1.2)
