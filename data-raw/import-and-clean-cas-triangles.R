@@ -25,7 +25,7 @@ import_and_clean_triangles <- function(lob, base_url){
 
 }
 
-# loop through list of files and run 'importAndCleanTriangles()'
+# loop through list of files and run 'import_and_clean_triangles()'
 tri_data <- purrr::map_df(lobs, import_and_clean_triangles, base_url)
 
 cas_loss_reserve_db <- tri_data %>% dplyr::ungroup() %>%

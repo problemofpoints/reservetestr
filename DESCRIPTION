@@ -1,7 +1,7 @@
 Package: reservetestr
 Version: 0.0.0.9000
 Title: Provides a Framework for Testing Loss Reserve Methods
-Description: This pacakge provides a framework for testing loss reserve methods. Specifically, a interface to test methods against the Casualty Actuarial Society (CAS) Loss Reserve Database is provided.
+Description: This pacakge provides a framework for testing loss reserve methods. Specifically, an interface to test methods against the Casualty Actuarial Society (CAS) Loss Reserve Database is provided.
 Authors@R: person("Adam", "Troyer", , "problemofpoints@gmail.com", c("aut", "cre"))
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -13,7 +13,7 @@ Suggests:
     knitr,
     rmarkdown
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 VignetteBuilder: knitr
 URL: https://github.com/problemofpoints/reservetestr
 BugReports: https://github.com/problemofpoints/reservetestr/issues

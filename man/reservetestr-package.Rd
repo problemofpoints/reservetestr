@@ -6,7 +6,7 @@
 \alias{reservetestr-package}
 \title{reservetestr: Provides a Framework for Testing Loss Reserve Methods}
 \description{
-This pacakge provides a framework for testing loss reserve methods. Specifically, a interface to test methods against the Casualty Actuarial Society (CAS) Loss Reserve Database is provided.
+This pacakge provides a framework for testing loss reserve methods. Specifically, an interface to test methods against the Casualty Actuarial Society (CAS) Loss Reserve Database is provided.
 }
 \seealso{
 Useful links:
