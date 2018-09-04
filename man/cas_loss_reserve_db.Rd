@@ -4,9 +4,9 @@
 \name{cas_loss_reserve_db}
 \alias{cas_loss_reserve_db}
 \title{CAS Loss Reserve Triangle Database}
-\format{a \code{\link[tibble:tibble]{tibble}} with columns as described below
+\format{a nested \code{\link[tibble:tibble]{tibble}} with columns as described below
 
-Column descriptions:
+\code{full_long_tri} column descriptions:
 \itemize{
 \item line: name of line of business ("ppauto", "wkcomp", "comauto", "medmal", "prodliab", "othliab")
 \item group_id: NAIC company code
@@ -18,6 +18,7 @@ Column descriptions:
 \item increm_incurred_loss
 \item cum_paid_loss
 \item increm_paid_loss
+\item booked_ult_loss: cum_incurred_loss plus bulk_ibnr
 \item bulk_ibnr: bulk and IBNR reserves on net losses and defense and cost containment expenses reported at year end
 \item direct_ep: direct and assumed earned premium
 \item ceded_ep: earned premium ceded to reinsurers
@@ -25,6 +26,18 @@ Column descriptions:
 \item single_entity: 1 indicates a single entity, 0 indicates a group insurer
 \item posted_reserve_1997: Posted reserves in year 1997 taken from the Underwriting and Investment Exhibit - Part 2A,
 including net losses unpaid and unpaid loss adjustment expenses
+\code{train_tri_set}:
+\item a list of \code{triangle} objects, including net earned premium as exposure
+\item upper triangle only; used as input to loss reserving methods
+\item \code{paid_tri} = cumulative paid loss triangle
+\item \code{case_tri} = cumulative case-incurred loss triangle
+\item \code{ult_tri} = cumulative booked ultimate incurred loss triangle
+\code{test_tri_set}:
+\item a list of \code{triangle} objects
+\item lower triangle only; used to test accuracy of loss reserving methods
+\item \code{paid_tri} = cumulative paid loss triangle
+\item \code{case_tri} = cumulative case-incurred loss triangle
+\item \code{ult_tri} = cumulative booked ultimate incurred loss triangle
 }}
 \source{
 \href{http://www.casact.org/research/index.cfm?fa=loss_reserves_data}{LOSS RESERVING DATA PULLED FROM NAIC SCHEDULE P}

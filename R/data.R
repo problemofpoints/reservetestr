@@ -14,9 +14,9 @@
 #' This package pulls the by line .csv files from the CAS website and creates a [tidy](http://vita.had.co.nz/papers/tidy-data.html)
 #' data set. Column names were changed from the original data to make them more user friendly.
 #'
-#' @format a [`tibble`][tibble::tibble()] with columns as described below
+#' @format a nested [`tibble`][tibble::tibble()] with columns as described below
 #'
-#' Column descriptions:
+#' `full_long_tri` column descriptions:
 #'  - line: name of line of business ("ppauto", "wkcomp", "comauto", "medmal", "prodliab", "othliab")
 #'  - group_id: NAIC company code
 #'  - company
@@ -27,6 +27,7 @@
 #'  - increm_incurred_loss
 #'  - cum_paid_loss
 #'  - increm_paid_loss
+#'  - booked_ult_loss: cum_incurred_loss plus bulk_ibnr
 #'  - bulk_ibnr: bulk and IBNR reserves on net losses and defense and cost containment expenses reported at year end
 #'  - direct_ep: direct and assumed earned premium
 #'  - ceded_ep: earned premium ceded to reinsurers
@@ -34,6 +35,18 @@
 #'  - single_entity: 1 indicates a single entity, 0 indicates a group insurer
 #'  - posted_reserve_1997: Posted reserves in year 1997 taken from the Underwriting and Investment Exhibit - Part 2A,
 #'  including net losses unpaid and unpaid loss adjustment expenses
+#' `train_tri_set`:
+#'  - a list of `triangle` objects, including net earned premium as exposure
+#'  - upper triangle only; used as input to loss reserving methods
+#'  - `paid_tri` = cumulative paid loss triangle
+#'  - `case_tri` = cumulative case-incurred loss triangle
+#'  - `ult_tri` = cumulative booked ultimate incurred loss triangle
+#'  `test_tri_set`:
+#'  - a list of `triangle` objects
+#'  - lower triangle only; used to test accuracy of loss reserving methods
+#'  - `paid_tri` = cumulative paid loss triangle
+#'  - `case_tri` = cumulative case-incurred loss triangle
+#'  - `ult_tri` = cumulative booked ultimate incurred loss triangle
 #'
 #' @source
 #' [LOSS RESERVING DATA PULLED FROM NAIC SCHEDULE P](http://www.casact.org/research/index.cfm?fa=loss_reserves_data)
