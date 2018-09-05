@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 # reservetestr
 
-The goal of reservetestr is to ...
+The goal of reservetestr is to provide a framework for testing loss reserve methods. Specifically, an interface to test methods against the [Casualty Actuarial Society (CAS) Loss Reserve Database](http://www.casact.org/research/index.cfm?fa=loss_reserves_data) is provided.
 
 ## Installation
 
@@ -26,26 +26,25 @@ You can install reservetestr from GitHub with:
 devtools::install_github("problemofpoints/reservetestr")
 ```
 
-## Example
+## Example Useage
 
-This is a basic example which shows you how to solve a common problem:
+Insert example here...
 
-```{r example}
-## basic example code
+```{r example-1}
+
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Future Enhancements
 
-```{r cars}
-summary(cars)
-```
+- [ ] write function to apply reserving methods
+  - start with deterministic? then stochastic? 
+    - different functions or argument?
+  - make resulting object an S3 class? 
+  - use CL/Mack as test (use as vignette)
+  - add more error handling
+- [ ] write wrappers around methods to work with above function
+  - do for as many methods as possible included in `ChainLadder` package
+  - for deterministic, do average of methods example?
+  - add more error handling
+- [ ] write functions to create exhibits
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
