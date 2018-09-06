@@ -26,7 +26,6 @@ library(ggplot2)
 
 
 ggSetTheme()
-
 ```
 
 This vignette shows how to use the `reservetestr` package to back-test the Mack Method on the CAS Loss Reserve database. 
@@ -74,40 +73,31 @@ Now we can run the Mack method on our triangle training data and back-test its a
 
 
 ```{r backtest-mack, warning=FALSE, message=FALSE, echo=FALSE}
-
 mack_paid_results <- run_single_backtest(cas_db_subset, 
                                          testr_MackChainLadder, 
                                          lines_to_include = "comauto",
                                          loss_type_to_backtest = "paid", 
                                          method_label = "mack_paid")
-
 ```
 
 The output provided is the below. 
 
 ```{r mack-glimpse}
-
 glimpse(mack_paid_results)
-
 ```
 
-We can create a p-p plot to visually access the accuracy of our estimates.
+We can create a p-p plot to visually access the accuracy of our estimates. If our method was perfect, we would expect to see the dots fall along the 45 degree line - indicating that our implied percentiles are perfectly uniform.
+
+That is not the case in this example, so for "comauto" the Mack method applied to paid data does not back-test well.
 
 ```{r mack-exhibits-pp}
-
 create_pp_plot(mack_paid_results, by_line = TRUE)
-
 ```
 
+We can also graph the histogram of our implied percentiles to check whether they are uniformily distributed.
 
 ```{r mack-exhibits-histogram}
-
 create_histogram_plot(mack_paid_results, by_line = TRUE, bin_number = 10)
-
 ```
 
-
-- add BootChainLadder 
-- add GLMReserve
-- build deck
 
