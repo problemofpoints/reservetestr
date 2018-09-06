@@ -1,5 +1,5 @@
 Package: reservetestr
-Version: 0.0.0.9000
+Version: 0.0.1
 Title: Provides a Framework for Testing Loss Reserve Methods
 Description: This pacakge provides a framework for testing loss reserve methods. Specifically, an interface to test methods against the Casualty Actuarial Society (CAS) Loss Reserve Database is provided.
 Authors@R: person("Adam", "Troyer", , "problemofpoints@gmail.com", c("aut", "cre"))

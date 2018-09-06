@@ -65,7 +65,7 @@ cas_db_subset <- cas_loss_reserve_db %>%
   get_meyers_subset()
 ```
 
-The main function is `run_single_backtest` which runs the `ChainLadder::MackChainLadder` method on each paid loss triangle. 
+The main function is `run_single_backtest` which, in this example, runs the `ChainLadder::MackChainLadder` method on each paid loss triangle. 
 
 ```{r backtest-mack, warning=FALSE, message=FALSE, echo=FALSE}
 mack_paid_results <- run_single_backtest(cas_db_subset, 
