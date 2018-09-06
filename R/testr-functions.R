@@ -5,8 +5,8 @@
 #' @param train_data a `triangle` object containing upper left of a loss triangle. Used as input to `ChainLadder::MackChainLadder`.
 #' @param test_data a `triangle` object containing the lower right portion of loss triangle. Used to test model estimates.
 #' @param loss_type a character indicating whether to use paid, case-incurred, or ultimate loss triangle
+#' @param .progress a `Progress` object used to display a text based progress bar. Default is NULL.
 #' @param ... additional arguments passed on to `ChainLadder::MackChainLadder`
-#'
 #' @return a `tibble` containing the true reserve, estimated mean, estimated coefficient of variation, and the implied
 #' percentile of the actual outcome
 #' @export
@@ -20,7 +20,9 @@
 #'  purrr::pluck("test_tri_set", 8)
 #'
 #' testr_mack <- testr_MackChainLadder(train_data, test_data, loss_type = "paid")
-testr_MackChainLadder <- function(train_data, test_data, loss_type = c("paid","case","ultimate"), ...){
+testr_MackChainLadder <- function(train_data, test_data, loss_type = c("paid","case","ultimate"), .progress = NULL, ...){
+
+  if ((!is.null(.progress)) && inherits(.progress, "Progress") && (.progress$i < .progress$n)) .progress$tick()$print()
 
   # extract triangle based on `loss_type`
   loss_type <- match.arg(loss_type, c("paid","case","ultimate"))

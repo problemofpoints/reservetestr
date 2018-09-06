@@ -56,6 +56,8 @@ run_single_backtest <- function(loss_data,
     method_label <- "method"
   }
 
+  pb <- dplyr::progress_estimated(nrow(loss_data))
+
   safe_reserving_function <- purrr::possibly(reserving_function, otherwise = NA_complex_)
 
   loss_data_filtered <- loss_data %>%
@@ -63,7 +65,7 @@ run_single_backtest <- function(loss_data,
 
   output <- loss_data_filtered %>%
     dplyr::mutate(result = purrr::map2(.data$train_tri_set, .data$test_tri_set, safe_reserving_function,
-                                       loss_type = loss_type_to_backtest, ...)) %>%
+                                       loss_type = loss_type_to_backtest, .progress = pb, ...)) %>%
     dplyr::mutate(method = method_label)
 
   output <- output %>%

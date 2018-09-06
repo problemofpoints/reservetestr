@@ -5,7 +5,7 @@
 \title{Back-test MackChainLadder method}
 \usage{
 testr_MackChainLadder(train_data, test_data, loss_type = c("paid", "case",
-  "ultimate"), ...)
+  "ultimate"), .progress = NULL, ...)
 }
 \arguments{
 \item{train_data}{a \code{triangle} object containing upper left of a loss triangle. Used as input to \code{ChainLadder::MackChainLadder}.}
@@ -13,6 +13,8 @@ testr_MackChainLadder(train_data, test_data, loss_type = c("paid", "case",
 \item{test_data}{a \code{triangle} object containing the lower right portion of loss triangle. Used to test model estimates.}
 
 \item{loss_type}{a character indicating whether to use paid, case-incurred, or ultimate loss triangle}
+
+\item{.progress}{a \code{Progress} object used to display a text based progress bar. Default is NULL.}
 
 \item{...}{additional arguments passed on to \code{ChainLadder::MackChainLadder}}
 }

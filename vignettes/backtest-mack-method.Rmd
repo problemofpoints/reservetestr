@@ -70,18 +70,22 @@ cas_db_subset %>%
 Now we can run the Mack method on our triangle training data and back-test its accuracy. We use the implementation of the Mack method in the `ChainLadder` package, `MackChainLadder`.
 
 
-```{r backtest-mack, warning=FALSE, message=FALSE}
+```{r backtest-mack, warning=FALSE, message=FALSE, echo=FALSE}
 
+mack_paid_results <- run_single_backtest(cas_db_subset, testr_MackChainLadder, 
+                                         loss_type_to_backtest = "paid", method_label = "mack_paid")
 
-train_data <- cas_db_subset$train_tri_set[[8]]
-test_data <- cas_db_subset$test_tri_set[[8]]
-
-testr_MackChainLadder(train_data, test_data, loss_type = "paid")
-
-ans <- run_single_backtest(cas_db_subset, testr_MackChainLadder, loss_type_to_backtest = "paid", method_label = "mack_paid")
-  
 
 ```
 
+```{r mack-exhibits}
 
+
+
+```
+
+- create qqplot graphs (summary function to calculate expected percentiles and graph); K-S test, if possible
+- add BootChainLadder 
+- add GLMReserve
+- build deck
 
