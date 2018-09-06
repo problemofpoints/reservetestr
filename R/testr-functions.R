@@ -32,14 +32,13 @@ testr_MackChainLadder <- function(train_data, test_data, loss_type = c("paid","c
 
   # run method and pull out key results
   mack_result <- ChainLadder::MackChainLadder(tri, ...)
-  mack_cv <- summary(mack_result)$Totals[6,1]
   mack_se <- summary(mack_result)$Totals[5,1]
   mack_mean <- summary(mack_result)$Totals[4,1]
   mack_ultimate <- summary(mack_result)$Totals[3,1]
 
   latest_paid <- sum(ChainLadder::getLatestCumulative(train_data[["paid"]]))
-  actual_unpaid <- sum(ChainLadder::getLatestCumulative(tri_test)) - latest_paid
   actual_ultimate <- sum(ChainLadder::getLatestCumulative(tri_test))
+  actual_unpaid <- actual_ultimate - latest_paid
   mean_unpaid_est <- mack_ultimate - latest_paid
 
   # calculate implied percentile assuming lognormal distribution for reserves
