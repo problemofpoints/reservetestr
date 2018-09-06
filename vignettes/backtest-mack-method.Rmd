@@ -102,7 +102,7 @@ create_pp_plot(mack_paid_results, by_line = TRUE)
 
 ```{r mack-exhibits-histogram}
 
-create_histogram_plot(mack_paid_results, , by_line = TRUE, bin_number = 10)
+create_histogram_plot(mack_paid_results, by_line = TRUE, bin_number = 10)
 
 ```
 

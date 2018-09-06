@@ -4,7 +4,7 @@
 
 #' Create p-p plot
 #'
-#' @param method_results a `tibble` output from [run_single_method]
+#' @param method_results a `tibble` output from [run_single_backtest()]
 #' @param cv_limits a numeric vector with upper and lower bound used to filter estimated CVs. Default is c(0,1)
 #' @param by_line a logical. Should graph be facetting by line. Default is TRUE
 #' @param confidence_level a numeric value indicating what confidence level to use in graph. Default is 0.95. NOT WORKING!
@@ -24,32 +24,32 @@ create_pp_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, c
   }
 
   method_results_filtered <-  method_results %>%
-    filter(!is.na(.data$cv_unpaid_est) & .data$cv_unpaid_est < cv_limits[2] & .data$cv_unpaid_est > cv_limits[1])
+    dplyr::filter(!is.na(.data$cv_unpaid_est) & .data$cv_unpaid_est < cv_limits[2] & .data$cv_unpaid_est > cv_limits[1])
 
   if(by_line){
-    method_results_filtered <- group_by(method_results_filtered, .data$line)
+    method_results_filtered <- dplyr::group_by(method_results_filtered, .data$line)
   }
 
-  se_line <- summarise(method_results_filtered, n = n(), se = 1.36 / sqrt(n))
+  se_line <- dplyr::summarise(method_results_filtered, n = n(), se = 1.36 / sqrt(n()))
 
   gg_data <- method_results_filtered %>%
-    arrange(.data$implied_pctl) %>%
-    mutate(fitted = cumsum(rep(1/(n()+1), n()))) %>%
-    arrange(.data$line, .data$group_id)
+    dplyr::arrange(.data$implied_pctl) %>%
+    dplyr::mutate(fitted = cumsum(rep(1/(n()+1), n()))) %>%
+    dplyr::arrange(.data$line, .data$group_id)
 
-  gg_plot <- ggplot(data = gg_data) +
-    geom_abline(colour="#808080", size=0.65) +
-    geom_abline(data=se_line, aes(intercept=se, slope=1),
+  gg_plot <- ggplot2::ggplot(data = gg_data) +
+    ggplot2::geom_abline(colour="#808080", size=0.65) +
+    ggplot2::geom_abline(data=se_line, ggplot2::aes(intercept=.data$se, slope=1),
                 colour="#808080", size=0.65, linetype=5) +
-    geom_abline(data=se_line, aes(intercept=-se, slope=1),
+    ggplot2::geom_abline(data=se_line, ggplot2::aes(intercept=-.data$se, slope=1),
                 colour="#808080", size=0.65, linetype=5) +
-    geom_point(aes(x = fitted, y = implied_pctl)) +
-    xlab("Expected Percentile") + ylab("Predicted Percentile") + #+ scale_y_continuous(labels=NULL)
-    ggtitle("PP Plot - Predicted vs. Expected Percentiles", subtitle = paste0("Method: ", method_results_filtered$method[1]))
+    ggplot2::geom_point(ggplot2::aes(x = .data$fitted, y = .data$implied_pctl)) +
+    ggplot2::xlab("Expected Percentile") + ggplot2::ylab("Predicted Percentile") + #+ scale_y_continuous(labels=NULL)
+    ggplot2::ggtitle("PP Plot - Predicted vs. Expected Percentiles", subtitle = paste0("Method: ", method_results_filtered$method[1]))
 
   if(by_line){
     gg_plot <- gg_plot +
-      facet_wrap(~ line)
+      ggplot2::facet_wrap(ggplot2::vars(line))
   }
 
   gg_plot
@@ -58,7 +58,7 @@ create_pp_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, c
 
 #' Create histogram
 #'
-#' @param method_results a `tibble` output from [run_single_method]
+#' @param method_results a `tibble` output from [run_single_backtest()]
 #' @param cv_limits a numeric vector with upper and lower bound used to filter estimated CVs. Default is c(0,1)
 #' @param by_line a logical. Should graph be facetting by line. Default is TRUE
 #' @param bin_number a numeric value giving the number of bins to use in the histogram.
@@ -78,24 +78,24 @@ create_histogram_plot <- function(method_results, cv_limits = c(0,1), by_line = 
   }
 
   method_results_filtered <-  method_results %>%
-    filter(!is.na(.data$cv_unpaid_est) & .data$cv_unpaid_est < cv_limits[2] & .data$cv_unpaid_est > cv_limits[1])
+    dplyr::filter(!is.na(.data$cv_unpaid_est) & .data$cv_unpaid_est < cv_limits[2] & .data$cv_unpaid_est > cv_limits[1])
 
   if(by_line){
-    method_results_filtered <- group_by(method_results_filtered, .data$line)
+    method_results_filtered <- dplyr::group_by(method_results_filtered, .data$line)
   }
 
   gg_data <- method_results_filtered %>%
-    arrange(.data$implied_pctl) %>%
-    arrange(.data$line, .data$group_id)
+    dplyr::arrange(.data$implied_pctl) %>%
+    dplyr::arrange(.data$line, .data$group_id)
 
-  gg_plot <- ggplot(data = gg_data) +
-    geom_histogram(aes(x = implied_pctl), bins = bin_number) +
-    xlab("Predicted Percentile") +
-    ggtitle("Histogram of Predicted Percentiles", subtitle = paste0("Method: ", method_results_filtered$method[1]))
+  gg_plot <- ggplot2::ggplot(data = gg_data) +
+    ggplot2::geom_histogram(ggplot2::aes(x = .data$implied_pctl), bins = bin_number) +
+    ggplot2::xlab("Predicted Percentile") +
+    ggplot2::ggtitle("Histogram of Predicted Percentiles", subtitle = paste0("Method: ", method_results_filtered$method[1]))
 
   if(by_line){
     gg_plot <- gg_plot +
-      facet_wrap(~ line)
+      ggplot2::facet_wrap(ggplot2::vars(.data$line))
   }
 
   gg_plot
