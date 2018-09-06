@@ -35,13 +35,15 @@
 #'  - single_entity: 1 indicates a single entity, 0 indicates a group insurer
 #'  - posted_reserve_1997: Posted reserves in year 1997 taken from the Underwriting and Investment Exhibit - Part 2A,
 #'  including net losses unpaid and unpaid loss adjustment expenses
+#'
 #' `train_tri_set`:
 #'  - a list of `triangle` objects, including net earned premium as exposure
 #'  - upper triangle only; used as input to loss reserving methods
 #'  - `paid_tri` = cumulative paid loss triangle
 #'  - `case_tri` = cumulative case-incurred loss triangle
 #'  - `ult_tri` = cumulative booked ultimate incurred loss triangle
-#'  `test_tri_set`:
+#'
+#'   `test_tri_set`:
 #'  - a list of `triangle` objects
 #'  - lower triangle only; used to test accuracy of loss reserving methods
 #'  - `paid_tri` = cumulative paid loss triangle

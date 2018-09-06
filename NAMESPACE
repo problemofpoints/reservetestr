@@ -2,4 +2,7 @@
 
 export("%>%")
 export(get_meyers_subset)
+export(run_single_backtest)
+export(testr_MackChainLadder)
 importFrom(magrittr,"%>%")
+importFrom(rlang,.data)

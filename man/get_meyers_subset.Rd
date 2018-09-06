@@ -10,7 +10,8 @@ get_meyers_subset(cas_triangle_database)
 \item{cas_triangle_database}{the CAS loss reserve database \link{cas_loss_reserve_db}.}
 }
 \value{
-a \code{tibble} filtered to include only 200 triangles used by Glenn Meyers
+a \code{tibble} filtered to include only 200 triangles used by Glenn Meyers. See
+\link{meyers_2016_wintereforum_appendix}
 }
 \description{
 Subset CAS loss reserve database

@@ -86,7 +86,7 @@ make_upper_triangle <- function(long_tri, loss_type){
 make_lower_triangle <- function(long_tri, loss_type){
 
   long_tri <- long_tri %>%
-    dplyr::filter(acc_yr + dev_lag - 1 > max(acc_yr))
+    dplyr::filter((acc_yr + dev_lag - 1 > max(acc_yr)) | dev_lag == 10)
 
   triangle <- ChainLadder::as.triangle(long_tri, origin = "acc_yr", dev = "dev_lag", value = loss_type)
 
@@ -100,17 +100,20 @@ make_lower_triangle <- function(long_tri, loss_type){
 cas_loss_reserve_db <- cas_loss_reserve_db %>%
   dplyr::group_by(line, group_id, company) %>%
   tidyr::nest(.key = "full_long_tri") %>%
-  dplyr::mutate(train_tri_set = map(full_long_tri, ~ list(paid_tri = make_upper_triangle(.x, "cum_paid_loss"),
-                                                     case_tri = make_upper_triangle(.x, "cum_incurred_loss"),
-                                                     ult_tri = make_upper_triangle(.x, "booked_ult_loss"))),
-                test_tri_set = map(full_long_tri, ~ list(paid_tri = make_lower_triangle(.x, "cum_paid_loss"),
-                                                 case_tri = make_lower_triangle(.x, "cum_incurred_loss"),
-                                                 ult_tri = make_lower_triangle(.x, "booked_ult_loss"))))
+  dplyr::mutate(train_tri_set = map(full_long_tri, ~ list(paid = make_upper_triangle(.x, "cum_paid_loss"),
+                                                     case = make_upper_triangle(.x, "cum_incurred_loss"),
+                                                     ultimate = make_upper_triangle(.x, "booked_ult_loss"))),
+                test_tri_set = map(full_long_tri, ~ list(paid = make_lower_triangle(.x, "cum_paid_loss"),
+                                                 case = make_lower_triangle(.x, "cum_incurred_loss"),
+                                                 ultimate = make_lower_triangle(.x, "booked_ult_loss"))))
 
 
 cas_loss_reserve_db$train_tri_set[[10]]
 
 # write out data file
+cas_loss_reserve_db <- cas_loss_reserve_db %>%
+  arrange(line, group_id)
+
 devtools::use_data(cas_loss_reserve_db, overwrite = TRUE)
 
 

@@ -21,4 +21,9 @@ Imports:
     magrittr,
     rlang (>= 0.1.4),
     dplyr,
-    purrr
+    purrr,
+    ChainLadder,
+    tibble,
+    tidyr,
+    ggplot2,
+    stats

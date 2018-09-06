@@ -8,14 +8,14 @@ test_that("we can read in cas_loss_reserve_db", {
   full_long_tri <- cas_loss_reserve_db %>% tidyr::unnest(full_long_tri)
 
   train_data <- cas_loss_reserve_db %>%
-    dplyr::mutate(paid_sum_test = purrr::map_dbl(train_tri_set, ~ sum(.x$paid_tri, na.rm = TRUE)),
-           case_sum_test = purrr::map_dbl(train_tri_set, ~ sum(.x$case_tri, na.rm = TRUE)),
-           ult_sum_test = purrr::map_dbl(train_tri_set, ~ sum(.x$ult_tri, na.rm = TRUE)))
+    dplyr::mutate(paid_sum_test = purrr::map_dbl(train_tri_set, ~ sum(.x$paid, na.rm = TRUE)),
+           case_sum_test = purrr::map_dbl(train_tri_set, ~ sum(.x$case, na.rm = TRUE)),
+           ult_sum_test = purrr::map_dbl(train_tri_set, ~ sum(.x$ultimate, na.rm = TRUE)))
 
   test_data <- cas_loss_reserve_db %>%
-    dplyr::mutate(paid_sum_test = purrr::map_dbl(test_tri_set, ~ sum(.x$paid_tri, na.rm = TRUE)),
-           case_sum_test = purrr::map_dbl(test_tri_set, ~ sum(.x$case_tri, na.rm = TRUE)),
-           ult_sum_test = purrr::map_dbl(test_tri_set, ~ sum(.x$ult_tri, na.rm = TRUE)))
+    dplyr::mutate(paid_sum_test = purrr::map_dbl(test_tri_set, ~ sum(.x$paid, na.rm = TRUE)),
+           case_sum_test = purrr::map_dbl(test_tri_set, ~ sum(.x$case, na.rm = TRUE)),
+           ult_sum_test = purrr::map_dbl(test_tri_set, ~ sum(.x$ultimate, na.rm = TRUE)))
 
   expect_equal(nrow(tri_data_summary), 6)
   expect_equal(sum(tri_data_summary$line %in% c("ppauto", "wkcomp", "comauto", "medmal", "prodliab", "othliab")), 6)
@@ -23,7 +23,7 @@ test_that("we can read in cas_loss_reserve_db", {
   expect_equal(sum(full_long_tri[,7:17]), 12528464178)
 
   expect_equal(sum(train_data[,7:9]), 2325471056)
-  expect_equal(sum(test_data[,7:9]), 2215438647)
+  expect_equal(sum(test_data[,7:9]), 2249505912)
 
 
 })

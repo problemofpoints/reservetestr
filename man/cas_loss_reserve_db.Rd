@@ -26,13 +26,19 @@
 \item single_entity: 1 indicates a single entity, 0 indicates a group insurer
 \item posted_reserve_1997: Posted reserves in year 1997 taken from the Underwriting and Investment Exhibit - Part 2A,
 including net losses unpaid and unpaid loss adjustment expenses
+}
+
 \code{train_tri_set}:
+\itemize{
 \item a list of \code{triangle} objects, including net earned premium as exposure
 \item upper triangle only; used as input to loss reserving methods
 \item \code{paid_tri} = cumulative paid loss triangle
 \item \code{case_tri} = cumulative case-incurred loss triangle
 \item \code{ult_tri} = cumulative booked ultimate incurred loss triangle
+}
+
 \code{test_tri_set}:
+\itemize{
 \item a list of \code{triangle} objects
 \item lower triangle only; used to test accuracy of loss reserving methods
 \item \code{paid_tri} = cumulative paid loss triangle

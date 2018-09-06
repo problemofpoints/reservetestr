@@ -4,7 +4,8 @@
 #'
 #' @param cas_triangle_database the CAS loss reserve database [cas_loss_reserve_db].
 #'
-#' @return a `tibble` filtered to include only 200 triangles used by Glenn Meyers
+#' @return a `tibble` filtered to include only 200 triangles used by Glenn Meyers. See
+#' [meyers_2016_wintereforum_appendix]
 #' @export
 #'
 #' @examples
