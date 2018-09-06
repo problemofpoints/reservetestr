@@ -18,11 +18,14 @@ knitr::opts_chunk$set(
 )
 
 library(reservetestr)
-library(ChainLadder)
+suppressPackageStartupMessages(library(ChainLadder))
 library(dplyr)
 library(tidyr)
 library(purrr)
 library(ggplot2)
+
+
+ggSetTheme()
 
 ```
 
@@ -67,24 +70,43 @@ cas_db_subset %>%
 
 ## Back-testing
 
-Now we can run the Mack method on our triangle training data and back-test its accuracy. We use the implementation of the Mack method in the `ChainLadder` package, `MackChainLadder`.
+Now we can run the Mack method on our triangle training data and back-test its accuracy. We use the implementation of the Mack method in the `ChainLadder` package, `MackChainLadder`, applied to the `comauto` line of business.
 
 
 ```{r backtest-mack, warning=FALSE, message=FALSE, echo=FALSE}
 
-mack_paid_results <- run_single_backtest(cas_db_subset, testr_MackChainLadder, 
-                                         loss_type_to_backtest = "paid", method_label = "mack_paid")
-
-
-```
-
-```{r mack-exhibits}
-
-
+mack_paid_results <- run_single_backtest(cas_db_subset, 
+                                         testr_MackChainLadder, 
+                                         lines_to_include = "comauto",
+                                         loss_type_to_backtest = "paid", 
+                                         method_label = "mack_paid")
 
 ```
 
-- create qqplot graphs (summary function to calculate expected percentiles and graph); K-S test, if possible
+The output provided is the below. 
+
+```{r mack-glimpse}
+
+glimpse(mack_paid_results)
+
+```
+
+We can create a p-p plot to visually access the accuracy of our estimates.
+
+```{r mack-exhibits-pp}
+
+create_pp_plot(mack_paid_results, by_line = TRUE)
+
+```
+
+
+```{r mack-exhibits-histogram}
+
+create_histogram_plot(mack_paid_results, , by_line = TRUE, bin_number = 10)
+
+```
+
+
 - add BootChainLadder 
 - add GLMReserve
 - build deck
