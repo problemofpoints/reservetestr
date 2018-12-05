@@ -15,15 +15,17 @@ You can install reservetestr from GitHub with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("problemofpoints/reservetestr")
+devtools::install_github("problemofpoints/reservetestr", upgrade_dependencies = FALSE)
 ```
 
-## Example Useage
+## Example Usage
 
 ``` r
 library(reservetestr)
 suppressPackageStartupMessages(library(ChainLadder))
+#> Warning: package 'ChainLadder' was built under R version 3.4.4
 library(dplyr)
+#> Warning: package 'dplyr' was built under R version 3.4.4
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -35,7 +37,9 @@ library(dplyr)
 library(tidyr)
 #> Warning: package 'tidyr' was built under R version 3.4.4
 library(purrr)
+#> Warning: package 'purrr' was built under R version 3.4.4
 library(ggplot2)
+#> Warning: package 'ggplot2' was built under R version 3.4.4
 
 reservetestr::ggSetTheme()
 ```
@@ -62,6 +66,7 @@ cas_loss_reserve_db %>%
   get_meyers_subset() %>%
   filter(line == "ppauto" & group_id == 388) %>%
   pluck("train_tri_set", 1, "paid")
+#> Warning: package 'bindrcpp' was built under R version 3.4.4
 #>       dev_lag
 #> acc_yr     1     2     3     4     5     6     7     8     9    10
 #>   1988 13440 35680 48703 56319 61018 61119 63049 63556 63744 63835
@@ -89,6 +94,14 @@ cas_db_subset <- cas_loss_reserve_db %>%
 
 The main function is `run_single_backtest` which, in this example, runs
 the `ChainLadder::MackChainLadder` method on each paid loss triangle.
+
+``` r
+mack_paid_results <- run_single_backtest(cas_db_subset, 
+                                         testr_MackChainLadder, 
+                                         lines_to_include = "comauto",
+                                         loss_type_to_backtest = "paid", 
+                                         method_label = "mack_paid")
+```
 
 The output provided is the below.
 

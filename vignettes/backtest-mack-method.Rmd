@@ -72,7 +72,7 @@ cas_db_subset %>%
 Now we can run the Mack method on our triangle training data and back-test its accuracy. We use the implementation of the Mack method in the `ChainLadder` package, `MackChainLadder`, applied to the `comauto` line of business.
 
 
-```{r backtest-mack, warning=FALSE, message=FALSE, echo=FALSE}
+```{r backtest-mack, warning=FALSE, message=FALSE, echo=TRUE}
 mack_paid_results <- run_single_backtest(cas_db_subset, 
                                          testr_MackChainLadder, 
                                          lines_to_include = "comauto",

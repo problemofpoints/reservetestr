@@ -24,10 +24,10 @@ You can install reservetestr from GitHub with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("problemofpoints/reservetestr")
+devtools::install_github("problemofpoints/reservetestr", upgrade_dependencies = FALSE)
 ```
 
-## Example Useage
+## Example Usage
 
 ```{r import-libraries}
 library(reservetestr)
@@ -67,7 +67,7 @@ cas_db_subset <- cas_loss_reserve_db %>%
 
 The main function is `run_single_backtest` which, in this example, runs the `ChainLadder::MackChainLadder` method on each paid loss triangle. 
 
-```{r backtest-mack, warning=FALSE, message=FALSE, echo=FALSE}
+```{r backtest-mack, warning=FALSE, message=FALSE, echo=TRUE}
 mack_paid_results <- run_single_backtest(cas_db_subset, 
                                          testr_MackChainLadder, 
                                          lines_to_include = "comauto",
