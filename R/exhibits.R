@@ -12,7 +12,6 @@
 #' @return a ggplot2 object
 #' @export
 #'
-#' @examples
 create_pp_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, confidence_level = 0.95){
 
   if(!("tbl_df" %in% class(method_results))){
@@ -66,7 +65,6 @@ create_pp_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, c
 #' @return a ggplot2 object
 #' @export
 #'
-#' @examples
 create_histogram_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, bin_number = NULL){
 
   if(!("tbl_df" %in% class(method_results))){
