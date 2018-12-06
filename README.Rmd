@@ -36,7 +36,7 @@ devtools::install_github("problemofpoints/reservetestr", upgrade_dependencies = 
 
 ## Example Usage
 
-```{r import-libraries}
+```{r import-libraries, warning=FALSE}
 library(reservetestr)
 suppressPackageStartupMessages(library(ChainLadder))
 library(dplyr)

@@ -34,9 +34,7 @@ devtools::install_github("problemofpoints/reservetestr", upgrade_dependencies = 
 ``` r
 library(reservetestr)
 suppressPackageStartupMessages(library(ChainLadder))
-#> Warning: package 'ChainLadder' was built under R version 3.4.4
 library(dplyr)
-#> Warning: package 'dplyr' was built under R version 3.4.4
 #> 
 #> Attaching package: 'dplyr'
 #> The following objects are masked from 'package:stats':
@@ -46,11 +44,8 @@ library(dplyr)
 #> 
 #>     intersect, setdiff, setequal, union
 library(tidyr)
-#> Warning: package 'tidyr' was built under R version 3.4.4
 library(purrr)
-#> Warning: package 'purrr' was built under R version 3.4.4
 library(ggplot2)
-#> Warning: package 'ggplot2' was built under R version 3.4.4
 
 reservetestr::ggSetTheme()
 ```
