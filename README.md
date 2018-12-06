@@ -5,6 +5,8 @@
 
 [![Travis build
 status](https://travis-ci.org/problemofpoints/reservetestr.svg?branch=master)](https://travis-ci.org/problemofpoints/reservetestr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/problemofpoints/reservetestr?branch=master&svg=true)](https://ci.appveyor.com/project/problemofpoints/reservetestr)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Coverage
 status](https://codecov.io/gh/problemofpoints/reservetestr/branch/master/graph/badge.svg)](https://codecov.io/github/problemofpoints/reservetestr?branch=master)
