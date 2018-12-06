@@ -1,6 +1,15 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+<!-- badges: start -->
+
+[![Travis build
+status](https://travis-ci.org/problemofpoints/reservetestr.svg?branch=master)](https://travis-ci.org/problemofpoints/reservetestr)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Coverage
+status](https://codecov.io/gh/problemofpoints/reservetestr/branch/master/graph/badge.svg)](https://codecov.io/github/problemofpoints/reservetestr?branch=master)
+<!-- badges: end -->
+
 # reservetestr
 
 The goal of reservetestr is to provide a framework for testing loss
