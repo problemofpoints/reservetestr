@@ -37,10 +37,14 @@ import_and_clean_triangles <- function(lob){
                                       "bulk_ibnr", "direct_ep", "ceded_ep", "net_ep", "single_entity", "posted_reserve_1997"))
 
   # add incremental losses
-  df <- df %>% dplyr::group_by(group_id, acc_yr) %>% dplyr::arrange(group_id, acc_yr, dev_yr) %>%
+  df <- df %>%
+    dplyr::group_by(group_id, acc_yr) %>%
+    dplyr::arrange(group_id, acc_yr, dev_yr) %>%
     dplyr::mutate(increm_paid_loss = dplyr::if_else(dev_lag != 1, cum_paid_loss - dplyr::lag(cum_paid_loss), cum_paid_loss),
+                  cum_caseinc_loss = cum_incurred_loss - bulk_ibnr,
+                  increm_caseinc_loss = dplyr::if_else(dev_lag != 1, cum_caseinc_loss - dplyr::lag(cum_caseinc_loss), cum_caseinc_loss),
                   increm_incurred_loss = dplyr::if_else(dev_lag != 1, cum_incurred_loss - dplyr::lag(cum_incurred_loss), cum_incurred_loss),
-                  booked_ult_loss = cum_incurred_loss + bulk_ibnr) %>%
+                  booked_ult_loss = cum_incurred_loss) %>%
     dplyr::ungroup()
 
   # add lob name
@@ -54,7 +58,7 @@ import_and_clean_triangles <- function(lob){
 tri_data <- purrr::map_df(lobs, import_and_clean_triangles)
 
 cas_loss_reserve_db <- tri_data %>%
-  dplyr::select(line, 1:6, increm_incurred_loss, 7, increm_paid_loss, booked_ult_loss, 8:12,14,13)
+  dplyr::select(line, 1:5, cum_caseinc_loss, increm_caseinc_loss, 7, increm_paid_loss, booked_ult_loss, 8:12,14,13)
 
 # functions to create triangles from long triangle tibble
 make_upper_triangle <- function(long_tri, loss_type){
@@ -98,13 +102,12 @@ make_lower_triangle <- function(long_tri, loss_type){
 
 
 cas_loss_reserve_db <- cas_loss_reserve_db %>%
-  dplyr::group_by(line, group_id, company) %>%
-  tidyr::nest(.key = "full_long_tri") %>%
+  dplyr::group_nest(line, group_id, company, .key = "full_long_tri") %>%
   dplyr::mutate(train_tri_set = map(full_long_tri, ~ list(paid = make_upper_triangle(.x, "cum_paid_loss"),
-                                                     case = make_upper_triangle(.x, "cum_incurred_loss"),
+                                                     case = make_upper_triangle(.x, "cum_caseinc_loss"),
                                                      ultimate = make_upper_triangle(.x, "booked_ult_loss"))),
                 test_tri_set = map(full_long_tri, ~ list(paid = make_lower_triangle(.x, "cum_paid_loss"),
-                                                 case = make_lower_triangle(.x, "cum_incurred_loss"),
+                                                 case = make_lower_triangle(.x, "cum_caseinc_loss"),
                                                  ultimate = make_lower_triangle(.x, "booked_ult_loss"))))
 
 
@@ -114,11 +117,12 @@ cas_loss_reserve_db$train_tri_set[[10]]
 cas_loss_reserve_db <- cas_loss_reserve_db %>%
   arrange(line, group_id)
 
-devtools::use_data(cas_loss_reserve_db, overwrite = TRUE)
+use_data(cas_loss_reserve_db, overwrite = TRUE)
 
 
 # summary of db
-tri_data_summary <- cas_loss_reserve_db %>% dplyr::group_by(line) %>%
+tri_data_summary <- cas_loss_reserve_db %>%
+  dplyr::group_by(line) %>%
   dplyr::summarise(ct_comp = length(unique(company)))
 
 knitr::kable(tri_data_summary, format = "pandoc",

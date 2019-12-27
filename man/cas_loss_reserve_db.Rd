@@ -14,8 +14,8 @@
 \item acc_yr
 \item dev_yr
 \item dev_lag: development year (acc_yr - 1987 + dev_yr - 1987 - 1)
-\item cum_incurred_loss
-\item increm_incurred_loss
+\item cum_caseinc_loss
+\item increm_caseinc_loss
 \item cum_paid_loss
 \item increm_paid_loss
 \item booked_ult_loss: cum_incurred_loss plus bulk_ibnr

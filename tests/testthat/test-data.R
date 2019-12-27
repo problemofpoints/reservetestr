@@ -20,10 +20,10 @@ test_that("we can read in cas_loss_reserve_db", {
   expect_equal(nrow(tri_data_summary), 6)
   expect_equal(sum(tri_data_summary$line %in% c("ppauto", "wkcomp", "comauto", "medmal", "prodliab", "othliab")), 6)
 
-  expect_equal(sum(full_long_tri[,7:17]), 12528464178)
+  expect_equal(sum(full_long_tri[,7:17]), 12276726887)
 
-  expect_equal(sum(train_data[,7:9]), 2325471056)
-  expect_equal(sum(test_data[,7:9]), 2249505912)
+  expect_equal(sum(train_data[,7:9]), 2105912184)
+  expect_equal(sum(test_data[,7:9]), 2218097678)
 
 
 })

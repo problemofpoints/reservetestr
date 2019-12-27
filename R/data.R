@@ -23,8 +23,8 @@
 #'  - acc_yr
 #'  - dev_yr
 #'  - dev_lag: development year (acc_yr - 1987 + dev_yr - 1987 - 1)
-#'  - cum_incurred_loss
-#'  - increm_incurred_loss
+#'  - cum_caseinc_loss
+#'  - increm_caseinc_loss
 #'  - cum_paid_loss
 #'  - increm_paid_loss
 #'  - booked_ult_loss: cum_incurred_loss plus bulk_ibnr
