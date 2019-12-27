@@ -60,7 +60,7 @@ Below is an example paid loss triangle from the database. The first triangle is 
 
 ```{r sample-data-train, fig.cap="Sampe Paid Loss Triangle - Training data"}
 cas_loss_reserve_db %>%
-  get_meyers_subset() %>%
+  get_meyers_subset(edition = 2) %>%
   filter(line == "ppauto" & group_id == 388) %>%
   pluck("train_tri_set", 1, "paid")
 ```
@@ -69,7 +69,7 @@ The back-testing results use a subset of the full database, resulting in 50 tria
 
 ```{r subset-data, fig.cap="Summary of Triangles by Line"}
 cas_db_subset <- cas_loss_reserve_db %>%
-  get_meyers_subset()
+  get_meyers_subset(edition = 2)
 ```
 
 The main function is `run_single_backtest` which, in this example, runs the `ChainLadder::MackChainLadder` method on each paid loss triangle. 
