@@ -4,19 +4,21 @@
 \alias{get_meyers_subset}
 \title{Subset CAS loss reserve database}
 \usage{
-get_meyers_subset(cas_triangle_database)
+get_meyers_subset(cas_triangle_database, edition = 2)
 }
 \arguments{
 \item{cas_triangle_database}{the CAS loss reserve database \link{cas_loss_reserve_db}.}
+
+\item{edition}{the edition of the Glenn Meyers triangles to use (1 or 2)}
 }
 \value{
 a \code{tibble} filtered to include only 200 triangles used by Glenn Meyers. See
-\link{meyers_2016_wintereforum_appendix}
+\link{meyers_2016_wintereforum_appendix} and \link{meyers_2019_appendix}
 }
 \description{
 Subset CAS loss reserve database
 }
 \examples{
-get_meyers_subset(cas_loss_reserve_db)
+get_meyers_subset(cas_loss_reserve_db, edition = 2)
 
 }

@@ -6,7 +6,7 @@
 #'
 #' @param method_results a `tibble` output from [run_single_backtest()]
 #' @param cv_limits a numeric vector with upper and lower bound used to filter estimated CVs. Default is c(0,1)
-#' @param by_line a logical. Should graph be facetting by line. Default is TRUE
+#' @param by_line a logical. Should graph be faceting by line. Default is TRUE
 #' @param confidence_level a numeric value indicating what confidence level to use in graph. Default is 0.95. NOT WORKING!
 #'
 #' @return a ggplot2 object
@@ -29,11 +29,11 @@ create_pp_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, c
     method_results_filtered <- dplyr::group_by(method_results_filtered, .data$line)
   }
 
-  se_line <- dplyr::summarise(method_results_filtered, n = n(), se = 1.36 / sqrt(n()))
+  se_line <- dplyr::summarise(method_results_filtered, n = dplyr::n(), se = 1.36 / sqrt(dplyr::n()))
 
   gg_data <- method_results_filtered %>%
     dplyr::arrange(.data$implied_pctl) %>%
-    dplyr::mutate(fitted = cumsum(rep(1/(n()+1), n()))) %>%
+    dplyr::mutate(fitted = cumsum(rep(1/(dplyr::n()+1), dplyr::n()))) %>%
     dplyr::arrange(.data$line, .data$group_id)
 
   gg_plot <- ggplot2::ggplot(data = gg_data) +
@@ -48,7 +48,7 @@ create_pp_plot <- function(method_results, cv_limits = c(0,1), by_line = TRUE, c
 
   if(by_line){
     gg_plot <- gg_plot +
-      ggplot2::facet_wrap(ggplot2::vars(line))
+      ggplot2::facet_wrap(.data$line)
   }
 
   gg_plot
@@ -93,7 +93,7 @@ create_histogram_plot <- function(method_results, cv_limits = c(0,1), by_line = 
 
   if(by_line){
     gg_plot <- gg_plot +
-      ggplot2::facet_wrap(ggplot2::vars(.data$line))
+      ggplot2::facet_wrap(.data$line)
   }
 
   gg_plot

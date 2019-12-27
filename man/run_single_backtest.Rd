@@ -4,10 +4,16 @@
 \alias{run_single_backtest}
 \title{Run reserve backtest for a single reserving method}
 \usage{
-run_single_backtest(loss_data, reserving_function,
+run_single_backtest(
+  loss_data,
+  reserving_function,
   lines_to_include = c("comauto", "othliab", "ppauto", "wkcomp"),
-  loss_type_to_backtest = c("paid", "case", "ultimate"), by_year = FALSE,
-  to_ultimate = TRUE, method_label = NULL, ...)
+  loss_type_to_backtest = c("paid", "case", "ultimate"),
+  by_year = FALSE,
+  to_ultimate = TRUE,
+  method_label = NULL,
+  ...
+)
 }
 \arguments{
 \item{loss_data}{a nested \code{tibble} containing loss triangle data. See \link{cas_loss_reserve_db}.}

@@ -4,8 +4,12 @@
 \alias{create_histogram_plot}
 \title{Create histogram}
 \usage{
-create_histogram_plot(method_results, cv_limits = c(0, 1), by_line = TRUE,
-  bin_number = NULL)
+create_histogram_plot(
+  method_results,
+  cv_limits = c(0, 1),
+  by_line = TRUE,
+  bin_number = NULL
+)
 }
 \arguments{
 \item{method_results}{a \code{tibble} output from \code{\link[=run_single_backtest]{run_single_backtest()}}}

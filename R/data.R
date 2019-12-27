@@ -75,4 +75,19 @@
 #'
 "meyers_2016_wintereforum_appendix"
 
+#' Appendix from the Second Edition of Glenn Meyer's Bayesian Stochastic Loss Reserve CAS Monograph
+#'
+#' @name meyers_2019_appendix
+#' @description
+#' The "Univariate Output" tab from the appendix of Glenn Meyer's paper
+#' [Stochastic Loss Reserving Using Bayesian MCMC Models (2nd edition)](https://www.casact.org/pubs/monographs/papers/08-Meyers.pdf),
+#' as pulled from the [CAS website](https://www.casact.org/pubs/monographs/index.cfm?fa=meyers-monograph08).
+#'
+#'
+#' @format a [`tibble`][tibble::tibble()]. See paper for description of the columns.
+#'
+#' @docType data
+#'
+"meyers_2019_appendix"
+
 

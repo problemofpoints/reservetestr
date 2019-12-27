@@ -4,8 +4,13 @@
 \alias{testr_BootChainLadder}
 \title{Back-test BootChainLadder method}
 \usage{
-testr_BootChainLadder(train_data, test_data, loss_type = c("paid", "case",
-  "ultimate"), .progress = NULL, ...)
+testr_BootChainLadder(
+  train_data,
+  test_data,
+  loss_type = c("paid", "case", "ultimate"),
+  .progress = NULL,
+  ...
+)
 }
 \arguments{
 \item{train_data}{a \code{triangle} object containing upper left of a loss triangle. Used as input to \code{\link[ChainLadder:BootChainLadder]{ChainLadder::BootChainLadder()}}.}

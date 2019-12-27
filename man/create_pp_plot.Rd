@@ -4,15 +4,19 @@
 \alias{create_pp_plot}
 \title{Create p-p plot}
 \usage{
-create_pp_plot(method_results, cv_limits = c(0, 1), by_line = TRUE,
-  confidence_level = 0.95)
+create_pp_plot(
+  method_results,
+  cv_limits = c(0, 1),
+  by_line = TRUE,
+  confidence_level = 0.95
+)
 }
 \arguments{
 \item{method_results}{a \code{tibble} output from \code{\link[=run_single_backtest]{run_single_backtest()}}}
 
 \item{cv_limits}{a numeric vector with upper and lower bound used to filter estimated CVs. Default is c(0,1)}
 
-\item{by_line}{a logical. Should graph be facetting by line. Default is TRUE}
+\item{by_line}{a logical. Should graph be faceting by line. Default is TRUE}
 
 \item{confidence_level}{a numeric value indicating what confidence level to use in graph. Default is 0.95. NOT WORKING!}
 }
